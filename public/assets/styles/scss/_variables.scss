@@ -1,0 +1,53 @@
+$colors: (
+    background:     #F7F1FF,
+    
+    accent-100:     #882AFF,
+    accent-200:     #EDDFFF,
+
+    white:          #FFFFFF,
+    border:         #D6C1F1,
+    
+    text-100:       #9987AF,
+    text-200:       #1E1E1E,
+    
+    success:        #43FF78,
+    warning:        #FFCA43,
+    danger:         #FF434E,
+);
+
+$media: (
+    mobile:   480,
+    tablet:   768,
+    laptop:   1024,
+    desktop:  1280,
+    wide:     1600,
+    ultrawide: 2560
+);
+
+@function color($color) {
+    @return map-get($colors, $color);
+}
+
+@function media($query) {
+    @return #{map-get($media, $query)}px;
+}
+
+@mixin placeholder($color) {
+    &::placeholder,
+    &::-webkit-input-placeholder {
+        opacity: 1;
+        color: color($color);
+    }
+}
+
+@mixin autofill() {
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill::first-line {
+        color: color(text);
+        box-shadow: inset 0 0 0 100rem color(white);
+        -webkit-text-fill-color: color(text);
+        -webkit-box-shadow: inset 0 0 0 100rem color(white);
+    }
+}
