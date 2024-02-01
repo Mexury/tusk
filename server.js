@@ -4,8 +4,13 @@ const app = express()
 const session = require('express-session')
 dotenv.config()
 
+// Insert custom functions at prototype level
+String.prototype.isNullOrEmpty = function () {
+    return this == null || this == undefined || this.trim() === ''
+}
+
 // Define middlewares
-const AuthMiddleware = require('./middlewares/AuthMiddleware')
+// const AuthMiddleware = require('./middlewares/AuthMiddleware')
 
 // Define routes
 const ApiRouter = require('./routers/ApiRouter')
@@ -31,15 +36,9 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        secure: true
+        maxAge: 1000 * 60 * 60 * 24 // 24 hours
     }
 }))
-
-// Initialize controllers
-const Users = require('./controllers/Users')
-
-// Initialize middlewares
-app.use(AuthMiddleware)
 
 // Initialize routes
 app.use('/api', ApiRouter)

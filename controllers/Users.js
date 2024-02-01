@@ -1,18 +1,7 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt')
-
-class Response {
-    success
-    data
-    error
-
-    constructor(success, data, error) {
-        this.success = success
-        this.data = data
-        this.error = error
-    }
-}
+const Response = require('../helpers/Result')
 
 const exclude = (entry, keys) => {
 	if (entry) for (let key of keys) delete entry[key]
@@ -22,23 +11,22 @@ const exclude = (entry, keys) => {
 const hashPassword = async (password) => await bcrypt.hash(password, 10)
 const comparePassword = async (password, hash) => await bcrypt.compare(password, hash)
 
-const exists = async (email) => {
+const exists = async (email, includePassword) => {
     let user
     try {
         user = await prisma.user.findFirst({ where: { email }})
-        return new Response(user ? true : false, user ? exclude(user, ['password']) : null, user ? null : "User not found")
+        return new Response(user != null ? true : false, user ? exclude(user, [includePassword ? '' : 'password']) : null, user ? null : "User not found")
     } catch (error) {
         return new Response(false, null, error)
     }
 }
 
 const validate = async (email, password) => {
-    let exists = exists(email)
-    if (exists.success = true) {
-        if (await comparePassword(password, exists.data.password)) {
-            return new Response(true, exclude(exists.data, ['password']), null)
+    let result = await exists(email, true)
+    if (result.success = true) {
+        if (await comparePassword(password, result.data.password)) {
+            return new Response(true, exclude(result.data, ['password']), null)
         }
-        return new Response(false, null, "Incorrect email or password")
     }
     return new Response(false, null, "Incorrect email or password")
 }

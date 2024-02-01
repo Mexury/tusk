@@ -1,29 +1,24 @@
-module.exports = async (req, res, next) => {
+const isAuthenticated = async (req, res, next) => {
     const { session } = req
-    const url = req.originalUrl
 
-    switch(url) {
-        default:
-            if (!session.user) {
-                res.redirect('/login')
-                return
-            }
-            break
-        case '/login':
-            if (session.user) {
-                res.redirect('/')
-                return
-            }
-            break
-        case 'register':
-            if (session.user) {
-                res.redirect('/')
-                return
-            }
-            break
+    if (session && session.user) {
+        next()
+        return
     }
-    
+    res.redirect('/login')
+}
+
+const isNotAuthenticated = async (req, res, next) => {
+    const { session } = req
+
+    if (session && session.user) {
+        res.redirect('/')
+        return
+    }
     next()
 }
 
-console.log('[MIDDLE] Initialized AuthenticationMiddleware!')
+module.exports = {
+    isAuthenticated,
+    isNotAuthenticated
+}

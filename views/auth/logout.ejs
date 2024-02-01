@@ -1,0 +1,15 @@
+<%- include('../partials/head.ejs', { title: 'Signing out' }) %>
+<body class="page-login">
+    <div class="site-wrapper">
+        <div class="login-wrapper">
+            <img class="logo" src="/assets/svg/logo_big.svg" alt="Tusk logo">
+            <h1>Goodbye</h1>      
+        </div>
+    </div>
+</body>
+<script>
+    setTimeout(() => {
+        window.location.replace('/login')
+    }, 2000)
+</script>
+<%- include('../partials/footer.ejs') %>

@@ -104,6 +104,8 @@ nav {
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            max-width: 500px;
+            margin-inline: auto;
 
             .logo {
                 min-width: 100px;

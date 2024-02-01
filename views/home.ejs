@@ -1,11 +1,11 @@
-<%- include('partials/head.ejs', { title: 'Sign in' }) %>
+<%- include('partials/head.ejs', { title: 'Welcome' }) %>
 <body>
     <nav>
         <div class="site-wrapper">
             <div class="account-info">
                 <div class="account-info-text">
-                    <p class="display-name">Albert Lourensen</p>
-                    <a>Sign out</a>
+                    <p class="display-name"><%= user.display_name %></p>
+                    <a href="/logout">Sign out</a>
                 </div>
             </div>
             <div class="action-buttons">

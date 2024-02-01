@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const Auth = require('../middlewares/AuthMiddleware')
 
-router.get('/', (req, res) => {
-    res.json('home')
+router.get('/', Auth.isAuthenticated, (req, res) => {
+    const { session } = req
+    res.render('home', { user: session.user })
 })
  
 module.exports = router

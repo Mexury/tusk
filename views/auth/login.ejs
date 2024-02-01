@@ -1,20 +1,23 @@
-<%- include('partials/head.ejs', { title: 'Sign in' }) %>
+<%- include('../partials/head.ejs', { title: 'Sign in' }) %>
 <body class="page-login">
     <div class="site-wrapper">
         <div class="login-wrapper">
             <img class="logo" src="/assets/svg/logo_big.svg" alt="Tusk logo">
             <h1>Welcome back</h1>
 
-            <form>
+            <form method="post" action="/login" type="json">
+
                 <input type="email" name="email" id="email" placeholder="Email">
                 <input type="password" name="password" id="passsword" placeholder="Password">
             
                 <div class="button-wrapper">
-                    <button type="submit" class="alt">Sign in</button>
+                    <button type="submit" class="alt btn-icon btn-icon-login">Sign in</button>
                     <a href="/register">I don't have an account yet</a>
                 </div>
+
             </form>
+            
         </div>
     </div>
 </body>
-<%- include('partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>

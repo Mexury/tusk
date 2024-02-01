@@ -1,0 +1,24 @@
+<%- include('../partials/head.ejs', { title: 'Sign up' }) %>
+<body class="page-login">
+    <div class="site-wrapper">
+        <div class="login-wrapper">
+            <img class="logo" src="/assets/svg/logo_big.svg" alt="Tusk logo">
+            <h1>Welcome back</h1>
+
+            <form method="post" action="/register" type="json">
+
+                <input type="text" name="display_name" id="display-name" placeholder="Display name">
+                <input type="email" name="email" id="email" placeholder="Email">
+                <input type="password" name="password" id="passsword" placeholder="Password">
+            
+                <div class="button-wrapper">
+                    <button type="submit" class="alt btn-icon btn-icon-login">Sign up</button>
+                    <a href="/login">I already have an account</a>
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+</body>
+<%- include('../partials/footer.ejs') %>
