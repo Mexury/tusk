@@ -1,7 +1,7 @@
 const forms = document.querySelectorAll('form')
 
 JSON.parseFormData = (formData) => {
-    let jsonObject = {};
+    let jsonObject = {}
 
     formData.forEach((value, key) => {
         jsonObject[key] = jsonObject[key] ? [...[].concat(jsonObject[key]), value] : value
@@ -10,8 +10,27 @@ JSON.parseFormData = (formData) => {
     return jsonObject
 }
 
+const formNames = new Map()
+
+const formCallbacks = new Map([
+    ['login_form', async (form, response) => {
+        const json = await response.json()
+        if (json.success) window.location.replace('/')
+    }],
+    ['register_form', async (form, response) => {
+        const json = await response.json()
+        if (json.success) window.location.replace('/login')
+    }]
+])
+
 if (forms) {
-    forms.forEach(form => {
+    forms.forEach((form, index) => {
+
+        let formName = (form.getAttribute('name') ?? `form`)
+        while (formNames.has(formName) || formName === 'form') {
+            formName = `${formName}_${Array.from(formNames.keys()).filter(name => name === formName).length}`
+        }
+        formNames.set(formName, form)
         
         form.onsubmit = async e => {
             e.preventDefault()
@@ -38,7 +57,8 @@ if (forms) {
                 },
                 body: type == 'json' ? JSON.stringify(body) : body
             })
-        }
 
+            if (formCallbacks.has(formName)) formCallbacks.get(formName)(form, response)
+        }
     })
 }
