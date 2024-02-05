@@ -20,6 +20,14 @@ const formCallbacks = new Map([
     ['register_form', async (form, response) => {
         const json = await response.json()
         if (json.success) window.location.replace('/login')
+    }],
+    ['board_create_modal_form', async (form, response) => {
+        const json = await response.json()
+        if (json.success) {
+            // form.reset()
+            // new_board_modal.close()
+            window.location.reload()
+        }
     }]
 ])
 
@@ -31,6 +39,7 @@ if (forms) {
             formName = `${formName}_${Array.from(formNames.keys()).filter(name => name === formName).length}`
         }
         formNames.set(formName, form)
+        const atWhen = (form.getAttribute('@when') ?? 'submit').toLowerCase()
         
         form.onsubmit = async e => {
             e.preventDefault()
@@ -60,5 +69,8 @@ if (forms) {
 
             if (formCallbacks.has(formName)) formCallbacks.get(formName)(form, response)
         }
+
+        // Determine when to submit the form
+        if (atWhen == 'loaded') form.submit()
     })
 }

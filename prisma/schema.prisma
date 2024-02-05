@@ -33,7 +33,7 @@ model Board {
     // Relations
     tasks           Task[]
     creator         User        @relation(fields: [creator_id], references: [id])
-    creator_id      Int         @unique
+    creator_id      Int         
 }
 
 model Task {

@@ -15,12 +15,16 @@
     </nav>
 
     <div class="site-wrapper">
-        Show all boards here
+        <ul>
+            <% boards.forEach(board => { %>
+                <li><%= board.title %></li>
+            <% }) %>
+        </ul>
     </div>
 
     <div id="modals">
         <dialog id="new_board_modal">
-            <form method="post" action="/api/boards?action=create" type="json" name="board_create_modal_form">
+            <form method="post" action="/api/boards" type="json" name="board_create_modal_form">
                 <input type="text" name="board_name" id="board-name" placeholder="Board name">
                 <textarea name="board_note" placeholder="Note"></textarea>
             
