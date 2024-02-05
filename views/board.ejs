@@ -1,4 +1,4 @@
-<%- include('partials/head.ejs', { title: 'Welcome' }) %>
+<%- include('partials/head.ejs', { title: `Viewing "${board.title}"` }) %>
 <body>
     <nav>
         <div class="site-wrapper">
@@ -15,11 +15,9 @@
     </nav>
 
     <div class="site-wrapper">
-        <ul>
-            <% boards.forEach(board => { %>
-                <li><a href="/view/<%=board.share_id%>"><%= board.title %></a></li>
-            <% }) %>
-        </ul>
+        <% board.tasks.forEach(task => { %>
+            <li><%= task.title %></li>
+        <% }) %>
     </div>
 
     <div id="modals">
