@@ -57,6 +57,22 @@ input::placeholder, input::-webkit-input-placeholder, textarea::placeholder, tex
   color: #9987AF;
 }
 
+textarea {
+  resize: vertical;
+  min-height: 140px;
+  max-height: 600px;
+}
+
+dialog .button-wrapper {
+  display: flex;
+  gap: 8px;
+}
+dialog .button-wrapper button {
+  flex: 1 0 auto;
+  text-align: center;
+  justify-content: center;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -167,6 +183,25 @@ nav .site-wrapper .action-buttons {
   font-weight: normal;
   font-size: 32px;
   margin-bottom: 56px;
+}
+
+dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  outline: 0;
+  border: 0;
+  border-radius: 7px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  width: 40%;
+}
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+dialog button.alt {
+  background-color: #EDDFFF;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -9,11 +9,27 @@
                 </div>
             </div>
             <div class="action-buttons">
-                <button class="alt">New board</button>
+                <button class="alt" @click:eval="new_board_modal.showModal()">New board</button>
             </div>
         </div>
     </nav>
+
     <div class="site-wrapper">
+        Show all boards here
+    </div>
+
+    <div id="modals">
+        <dialog id="new_board_modal">
+            <form method="post" action="/api/boards?action=create" type="json" name="board_create_modal_form">
+                <input type="text" name="board_name" id="board-name" placeholder="Board name">
+                <textarea name="board_note" placeholder="Note"></textarea>
+            
+                <div class="button-wrapper">
+                    <button type="reset" class="alt btn-icon btn-icon-discard-changes" @click:eval="new_board_modal.close()">Discard changes</button>
+                    <button type="submit" class="btn-icon">Create board</button>
+                </div>
+            </form>
+        </dialog>
     </div>
 </body>
 <%- include('partials/footer.ejs') %>

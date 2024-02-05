@@ -59,3 +59,22 @@ input, textarea {
 
     @include placeholder(text-100);
 }
+
+textarea {
+    resize: vertical;
+    min-height: 140px;
+    max-height: 600px;
+}
+
+dialog {
+    .button-wrapper {
+        display: flex;
+        gap: 8px;
+
+        button {
+            flex: 1 0 auto;
+            text-align: center;
+            justify-content: center;
+        }
+    }
+}

@@ -23,7 +23,7 @@ const exists = async (email, includePassword) => {
 
 const validate = async (email, password) => {
     let result = await exists(email, true)
-    if (result.success = true) {
+    if (result.success == true) {
         if (await comparePassword(password, result.data.password)) {
             return new Response(true, exclude(result.data, ['password']), null)
         }
