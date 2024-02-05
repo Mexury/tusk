@@ -35,7 +35,24 @@ const create = async (userId, boardName, boardNote) => {
     }
 }
 
+const getByShareId = async (shareId) => {
+    try {
+        const board = await prisma.board.findFirst({
+            where: {
+                share_id: shareId
+            },
+            include: {
+                tasks: true
+            }
+        })
+        return new Response(board ? true : false, board ?? null, board ? null : 'Board not found')
+    } catch (error) {
+        return new Response(false, null, error)
+    }
+}
+
 module.exports = {
     getAllFromUser,
-    create
+    create,
+    getByShareId
 }
