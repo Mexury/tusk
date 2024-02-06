@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="action-buttons">
-                <button class="alt" @click:eval="new_board_modal.showModal()">New board</button>
+                <button class="alt" @click:eval="new_task_modal.showModal()">New task</button>
             </div>
         </div>
     </nav>
@@ -21,14 +21,15 @@
     </div>
 
     <div id="modals">
-        <dialog id="new_board_modal">
-            <form method="post" action="/api/boards" type="json" name="board_create_modal_form">
-                <input type="text" name="board_name" id="board-name" placeholder="Board name">
-                <textarea name="board_note" placeholder="Note"></textarea>
-            
+        <dialog id="new_task_modal">
+            <form method="post" action="/api/tasks" type="json" name="board_create_task_form">
+                <input type="text" name="task_name" id="task-name" placeholder="Task name">
+                <textarea name="task_note" placeholder="Note"></textarea>
+                <input type="hidden" name="board_id" value="<%=board.share_id%>">
+
                 <div class="button-wrapper">
-                    <button type="reset" class="alt btn-icon btn-icon-discard-changes" @click:eval="new_board_modal.close()">Discard changes</button>
-                    <button type="submit" class="btn-icon">Create board</button>
+                    <button type="reset" class="alt btn-icon btn-icon-discard-changes" @click:eval="new_task_modal.close()">Discard changes</button>
+                    <button type="submit" class="btn-icon">Create task</button>
                 </div>
             </form>
         </dialog>
