@@ -92,9 +92,10 @@ nav {
 }
 nav .site-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 16px;
   align-items: center;
+  justify-content: space-between;
 }
 nav .site-wrapper .account-info {
   display: flex;
@@ -125,9 +126,6 @@ nav .site-wrapper .account-info .display-name + a {
   margin-top: -2px;
   display: block;
   cursor: pointer;
-}
-nav .site-wrapper .action-buttons {
-  flex: 1 0 auto;
 }
 
 .site-wrapper {

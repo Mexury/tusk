@@ -16,15 +16,15 @@ body {
 }
 
 nav {
-    // display: flex;
     background-color: color(accent-100);
     padding-block: 7px;
 
     .site-wrapper {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 16px;
         align-items: center;
+        justify-content: space-between;
         
         .account-info {
             display: flex;
@@ -59,11 +59,6 @@ nav {
                     cursor: pointer;
                 }
             }
-        }
-    
-        .action-buttons {
-            // margin-left: auto;
-            flex: 1 0 auto;
         }
     }
 }
